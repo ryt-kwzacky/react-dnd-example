@@ -1,10 +1,12 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { Item, GroupType, GroupTypes } from '../data';
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Item, GroupType, GroupTypes } from "../data";
 
 type GroupedItems = {
-  [k in GroupType]?: Item[]
+  [k in GroupType]?: Item[];
 };
-type UseGroupedItems = (items: Item[]) => [GroupedItems, Item[], Dispatch<SetStateAction<Item[]>>];
+type UseGroupedItems = (
+  items: Item[]
+) => [GroupedItems, Item[], Dispatch<SetStateAction<Item[]>>];
 
 const useGroupedItems: UseGroupedItems = (items) => {
   const [list, setList] = useState<Item[]>(items);
@@ -12,11 +14,11 @@ const useGroupedItems: UseGroupedItems = (items) => {
   useEffect(() => {
     setGroupedItems(
       GroupTypes.reduce<GroupedItems>((acc, group) => {
-        acc[group] = list.filter(v => v.group === group);
+        acc[group] = list.filter((v) => v.group === group);
         return acc;
       }, {})
     );
-  }, [list])
+  }, [list]); // useStateで設定した list に変更があった時だけuseEffect内の処理を実行する
   return [groupedItems, list, setList];
 };
 

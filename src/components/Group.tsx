@@ -1,6 +1,6 @@
 import { useDrop } from "react-dnd";
 
-import styles from "./Group.module.css";
+import styles from "./Group.module.scss";
 import Item from "./Item";
 import Draggable from "./Draggable";
 import {
@@ -18,6 +18,7 @@ const Group: React.FC<{
   firstIndex: number;
   onMove: MoveHandler;
 }> = ({ items, groupType, firstIndex, onMove }) => {
+  // dropイベントだけ発行して、itemの入れ替えだけでなく、グループにdropできるようにしている
   const [, ref] = useDrop({
     accept: ItemTypes,
     hover(dragItem: ItemWithIndex) {

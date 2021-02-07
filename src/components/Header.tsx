@@ -1,7 +1,7 @@
 import React, { useCallback, ChangeEventHandler } from "react";
 import { LogoGithubIcon } from "@primer/octicons-react";
 
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 
 const Header: React.FC<{
   isHorizontal: boolean;
@@ -31,4 +31,5 @@ const Header: React.FC<{
   );
 };
 
+// TODO: memo?
 export default React.memo(Header);

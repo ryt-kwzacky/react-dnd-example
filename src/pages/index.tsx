@@ -2,13 +2,15 @@ import React, { useState, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import styles from "./index.module.css";
+import styles from "./index.module.scss";
 import Header from "@/components/Header";
 import Group from "@/components/Group";
 import useGroupedItems from "@/hooks/useGroupedItems";
 import { items as initial, GroupTypes, MoveHandler } from "@/data";
+import DragTest from "@/components/DragTest";
+import DropTest from "@/components/DropTest";
 
-export default function Home() {
+const Home: React.FC<{}> = () => {
   const [groupedItems, items, setItems] = useGroupedItems(initial);
   const moveItem: MoveHandler = useCallback(
     (dragIndex, targetIndex, group) => {
@@ -31,6 +33,13 @@ export default function Home() {
         isHorizontal={isHorizontal}
         onChangeIsHorizontal={setIsHorizontal}
       />
+      <DndProvider backend={HTML5Backend}>
+        <div>
+          <DragTest></DragTest>
+          <DropTest></DropTest>
+        </div>
+      </DndProvider>
+
       <div className={isHorizontal ? styles.horizontal : ""}>
         <DndProvider backend={HTML5Backend}>
           {GroupTypes.map((group) => {
@@ -60,4 +69,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;

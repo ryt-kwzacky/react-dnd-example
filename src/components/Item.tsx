@@ -1,6 +1,6 @@
 import { NoteIcon } from "@primer/octicons-react";
 
-import styles from "./Item.module.css";
+import styles from "./Item.module.scss";
 import type { Contents } from "../data";
 
 const Item: React.FC<{
